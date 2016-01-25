@@ -1,0 +1,19 @@
+makeCacheMatrix:
+makeCacheMatrix<- matrix(
+        c(2, 6, 4, 2, 3, 8, 1, 0),
+        nrow=4,
+        ncol=4)
+
+
+cacheSolve:
+cacheSolve<- function(makeCacheMatrix, ...) {
+  m<- makeCacheMatrix$getmean()
+  if(!is.null(m)) {
+      message("getting cached data")
+      return(m)
+  }
+  data<-makeCacheMatrix$get()
+  m<-mean(data, ...)
+  makeCacheMatrix$setmean(m)
+  m
+}
