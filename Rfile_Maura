@@ -1,5 +1,5 @@
 ## "makeCacheMatrix" creates a matrix. 
-## If "cacheSolve" (the second function) passes the "makeCacheMatrix" (the first function).
+## "cacheSolve" (the second function) passes the "makeCacheMatrix" (the first function).
 ## If the inverse is already completed, it uses the cached value to save time.
 ## The reason that it saves time is because you do not need to write out again, just use saved (cache) version.
 
