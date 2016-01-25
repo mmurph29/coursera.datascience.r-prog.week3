@@ -1,19 +1,43 @@
-makeCacheMatrix:
-makeCacheMatrix<- matrix(
+## "makeCacheMatrix" creates a matrix. 
+## If "cacheSolve" (the second function) passes the "makeCacheMatrix" (the first function).
+## If the inverse is already completed, it uses the cached value to save time.
+## The reason that it saves time is because you do not need to write out again, just use saved (cache) version.
+
+
+## The following function sets a matrix and then provides a way to set, get, set mean, and get mean
+   makeCacheMatrix<- matrix(
         c(2, 6, 4, 2, 3, 8, 1, 0),
-        nrow=4,
-        ncol=4)
+         nrow=4,
+         ncol=4)
+          cachedInv<- NULL ## begin inverse
+                set<- function(userValue = matrix()) {
+                        x<<- userValue
+                        cachedInv<<- NULL
+                        
+                get<- function() x
+                    setInverse<- function(invVal) {
+                        cachedInv<<- invVal
+                        return(cachedInv)
+                    getInverse<- function() cachedInv
+                    
+                setmean<- function(mean)  m<<- mean
+                
+                getmean<- function() m
+                    list(set=set, get=get, setInverse=setInverse, getInverse=getInverse)
+                }
 
 
-cacheSolve:
-cacheSolve<- function(makeCacheMatrix, ...) {
-  m<- makeCacheMatrix$getmean()
-  if(!is.null(m)) {
-      message("getting cached data")
-      return(m)
+## The following function will return a matrix that is the inverse of above makeCacheMatrix
+## This is done to save time, and it is easier than having to retype every time.
+ cacheSolve<- function(makeCacheMatrix, ...) {
+         m<- makeCacheMatrix$getmean()
+         if(!is.null(m)) {
+                 message("getting cached data")
+                return(m)
+        }
+        
+        data<-makeCacheMatrix$get()
+        m<-mean(data, ...)
+        makeCacheMatrix$setmean(m)
+        m
   }
-  data<-makeCacheMatrix$get()
-  m<-mean(data, ...)
-  makeCacheMatrix$setmean(m)
-  m
-}
