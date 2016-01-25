@@ -29,7 +29,7 @@
 
 ## The following function will return a matrix that is the inverse of above makeCacheMatrix
 ## This is done to save time, and it is easier than having to retype every time.
- cacheSolve<- function(makeCacheMatrix, ...) {
+   cacheSolve<- function(makeCacheMatrix, ...) {
          m<- makeCacheMatrix$getmean()
          if(!is.null(m)) {
                  message("getting cached data")
@@ -40,4 +40,4 @@
         m<-mean(data, ...)
         makeCacheMatrix$setmean(m)
         m
-  }
+   }
